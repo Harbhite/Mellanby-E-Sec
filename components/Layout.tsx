@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Calendar, Newspaper, Users, Archive, Hammer, Menu, X } from 'lucide-react';
+import { Home, Calendar, Newspaper, Users, Archive, Hammer, Menu, X, Image, Phone } from 'lucide-react';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -15,6 +15,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     { label: 'PORTAL', path: '/', icon: Home },
     { label: 'EVENTS', path: '/events', icon: Calendar },
     { label: 'NEWS', path: '/news', icon: Newspaper },
+    { label: 'GALLERY', path: '/gallery', icon: Image },
+    { label: 'CONTACTS', path: '/directory', icon: Phone },
   ];
 
   const portalItems = [
