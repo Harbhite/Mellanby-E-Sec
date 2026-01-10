@@ -12,6 +12,8 @@ import MeetingMinutes from './pages/MeetingMinutes';
 import HallAssembly from './pages/HallAssembly';
 import Legislation from './pages/Legislation';
 import Petitions from './pages/Petitions';
+import Gallery from './pages/Gallery';
+import ContactDirectory from './pages/ContactDirectory';
 
 const App: React.FC = () => {
   return (
@@ -21,6 +23,8 @@ const App: React.FC = () => {
           <Route path="/" element={<Secretariat />} />
           <Route path="/events" element={<Events />} />
           <Route path="/news" element={<News />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/directory" element={<ContactDirectory />} />
           <Route path="/exec-council" element={<ExecCouncil />} />
           <Route path="/exec-council/minutes" element={<MeetingMinutes />} />
           <Route path="/exec-council/assembly" element={<HallAssembly />} />
