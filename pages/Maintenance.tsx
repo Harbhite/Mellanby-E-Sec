@@ -1,8 +1,53 @@
 
-import React from 'react';
+import React, { useState } from 'react';
+import { supabase } from '../lib/supabase';
 import { Hammer, AlertTriangle, Info, Clock, CheckCircle } from 'lucide-react';
 
 const Maintenance: React.FC = () => {
+  const [formData, setFormData] = useState({
+    block: 'BLOCK A',
+    urgency: 'NORMAL',
+    nature: '',
+    description: ''
+  });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
+
+    try {
+      const { error } = await supabase
+        .from('maintenance_requests')
+        .insert([{
+          block: formData.block,
+          urgency: formData.urgency,
+          nature: formData.nature,
+          description: formData.description,
+          status: 'Pending'
+        }]);
+
+      if (error) throw error;
+
+      setSuccess(true);
+      setFormData({
+        block: 'BLOCK A',
+        urgency: 'NORMAL',
+        nature: '',
+        description: ''
+      });
+    } catch (err: any) {
+      console.error('Error submitting request:', err);
+      setError(err.message || 'Failed to submit request.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="p-6 sm:p-12 lg:p-24 animate-in fade-in duration-700">
       <header className="mb-10 lg:mb-12">
@@ -17,24 +62,44 @@ const Maintenance: React.FC = () => {
                 <h2 className="text-xl sm:text-2xl font-black uppercase">Report a Fault</h2>
             </div>
             
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+            {success && (
+              <div className="bg-emerald-50 border border-emerald-200 text-emerald-700 px-4 py-3 mb-6 mono text-xs font-bold uppercase flex items-center gap-2">
+                <CheckCircle size={16} /> Request Submitted Successfully
+              </div>
+            )}
+
+            {error && (
+              <div className="bg-rose-50 border border-rose-200 text-rose-700 px-4 py-3 mb-6 mono text-xs font-bold uppercase">
+                {error}
+              </div>
+            )}
+
+            <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                         <label className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Block/Location</label>
-                        <select className="w-full bg-[#f4f4f2] border-2 border-[#1a2a40] p-3 text-sm font-bold outline-none focus:bg-white transition-colors">
-                            <option>BLOCK A</option>
-                            <option>BLOCK B</option>
-                            <option>BLOCK C</option>
-                            <option>BLOCK D</option>
-                            <option>JCR / COMMON AREAS</option>
+                        <select
+                          value={formData.block}
+                          onChange={e => setFormData({...formData, block: e.target.value})}
+                          className="w-full bg-[#f4f4f2] border-2 border-[#1a2a40] p-3 text-sm font-bold outline-none focus:bg-white transition-colors"
+                        >
+                            <option value="BLOCK A">BLOCK A</option>
+                            <option value="BLOCK B">BLOCK B</option>
+                            <option value="BLOCK C">BLOCK C</option>
+                            <option value="BLOCK D">BLOCK D</option>
+                            <option value="JCR / COMMON AREAS">JCR / COMMON AREAS</option>
                         </select>
                     </div>
                     <div className="space-y-2">
                         <label className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Urgency</label>
-                        <select className="w-full bg-[#f4f4f2] border-2 border-[#1a2a40] p-3 text-sm font-bold outline-none focus:bg-white transition-colors">
-                            <option>NORMAL</option>
-                            <option>URGENT (24HR)</option>
-                            <option>EMERGENCY</option>
+                        <select
+                          value={formData.urgency}
+                          onChange={e => setFormData({...formData, urgency: e.target.value})}
+                          className="w-full bg-[#f4f4f2] border-2 border-[#1a2a40] p-3 text-sm font-bold outline-none focus:bg-white transition-colors"
+                        >
+                            <option value="NORMAL">NORMAL</option>
+                            <option value="URGENT (24HR)">URGENT (24HR)</option>
+                            <option value="EMERGENCY">EMERGENCY</option>
                         </select>
                     </div>
                 </div>
@@ -42,7 +107,10 @@ const Maintenance: React.FC = () => {
                 <div className="space-y-2">
                     <label className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Nature of Issue</label>
                     <input 
+                        required
                         type="text" 
+                        value={formData.nature}
+                        onChange={e => setFormData({...formData, nature: e.target.value})}
                         placeholder="E.G. FAULTY LOUVER, PLUMBING LEAK"
                         className="w-full bg-[#f4f4f2] border-2 border-[#1a2a40] p-3 text-sm outline-none focus:bg-white transition-colors"
                     />
@@ -51,13 +119,20 @@ const Maintenance: React.FC = () => {
                 <div className="space-y-2">
                     <label className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Detailed Description</label>
                     <textarea 
+                        required
+                        value={formData.description}
+                        onChange={e => setFormData({...formData, description: e.target.value})}
                         className="w-full bg-[#f4f4f2] border-2 border-[#1a2a40] p-3 text-sm min-h-[120px] outline-none focus:bg-white transition-colors"
                         placeholder="DESCRIBE THE ISSUE IN DETAIL FOR THE MAINTENANCE TEAM..."
                     />
                 </div>
 
-                <button className="w-full bg-[#1a2a40] text-white font-black py-4 uppercase tracking-[0.2em] sm:tracking-[0.3em] hover:bg-[#c5a059] hover:text-[#1a2a40] transition-all shadow-md active:scale-[0.98]">
-                    SUBMIT REPORT
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full bg-[#1a2a40] text-white font-black py-4 uppercase tracking-[0.2em] sm:tracking-[0.3em] hover:bg-[#c5a059] hover:text-[#1a2a40] transition-all shadow-md active:scale-[0.98] disabled:opacity-50"
+                >
+                    {loading ? 'SUBMITTING...' : 'SUBMIT REPORT'}
                 </button>
             </form>
         </div>
