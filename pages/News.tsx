@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { ArrowRight, User, Calendar } from 'lucide-react';
 import { NewsArticle } from '../types';
+import { MOCK_NEWS } from '../constants';
 
 const News: React.FC = () => {
   const [news, setNews] = useState<NewsArticle[]>([]);
@@ -21,7 +22,8 @@ const News: React.FC = () => {
 
     if (error) {
       console.error('Error fetching news:', error);
-    } else {
+      setNews(MOCK_NEWS);
+    } else if (data && data.length > 0) {
       const mappedNews: NewsArticle[] = data.map((item: any) => ({
         id: item.id,
         title: item.title,
@@ -33,6 +35,8 @@ const News: React.FC = () => {
         imageUrl: item.image_url
       }));
       setNews(mappedNews);
+    } else {
+      setNews(MOCK_NEWS);
     }
     setLoading(false);
   };
