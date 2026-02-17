@@ -4,6 +4,7 @@ import { supabase } from '../lib/supabase';
 import { exportToIcs, getGoogleCalendarUrl } from '../utils/calendarExport';
 import { Calendar as CalendarIcon, Download, MapPin, Clock, ExternalLink } from 'lucide-react';
 import { HallEvent } from '../types';
+import { MOCK_EVENTS } from '../constants';
 
 const Events: React.FC = () => {
   const [events, setEvents] = useState<HallEvent[]>([]);
@@ -23,7 +24,8 @@ const Events: React.FC = () => {
 
     if (error) {
       console.error('Error fetching events:', error);
-    } else {
+      setEvents(MOCK_EVENTS);
+    } else if (data && data.length > 0) {
       const mappedEvents: HallEvent[] = data.map((item: any) => ({
         id: item.id,
         title: item.title,
@@ -35,6 +37,8 @@ const Events: React.FC = () => {
         category: item.category
       }));
       setEvents(mappedEvents);
+    } else {
+      setEvents(MOCK_EVENTS);
     }
     setLoading(false);
   };
