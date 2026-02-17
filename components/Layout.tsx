@@ -44,6 +44,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <Link 
               key={item.path}
               to={item.path}
+              aria-current={isActive(item.path) ? 'page' : undefined}
               onClick={() => isMobile && setIsMenuOpen(false)}
               className="group flex flex-col items-start"
             >
@@ -67,6 +68,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
              <Link 
               key={item.path} 
               to={item.path} 
+              aria-current={isActive(item.path) ? 'page' : undefined}
               onClick={() => isMobile && setIsMenuOpen(false)}
               className="group flex flex-col items-start"
              >
@@ -122,6 +124,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </div>
         <button 
           onClick={() => setIsMenuOpen(true)}
+          aria-label="Open menu"
           className="p-2 border border-[#1a2a40] bg-white text-[#1a2a40] active:bg-[#c5a059] transition-colors shadow-sm"
         >
           <Menu size={20} />
@@ -135,6 +138,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <SidebarContent isMobile />
           <button 
             onClick={() => setIsMenuOpen(false)}
+            aria-label="Close menu"
             className="absolute top-6 -right-12 bg-[#1a2a40] text-white p-2 border border-white/20 shadow-lg active:scale-90 transition-transform"
           >
             <X size={20} />
