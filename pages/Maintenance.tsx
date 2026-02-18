@@ -63,13 +63,13 @@ const Maintenance: React.FC = () => {
             </div>
             
             {success && (
-              <div className="bg-emerald-50 border border-emerald-200 text-emerald-700 px-4 py-3 mb-6 mono text-xs font-bold uppercase flex items-center gap-2">
+              <div role="alert" className="bg-emerald-50 border border-emerald-200 text-emerald-700 px-4 py-3 mb-6 mono text-xs font-bold uppercase flex items-center gap-2">
                 <CheckCircle size={16} /> Request Submitted Successfully
               </div>
             )}
 
             {error && (
-              <div className="bg-rose-50 border border-rose-200 text-rose-700 px-4 py-3 mb-6 mono text-xs font-bold uppercase">
+              <div role="alert" className="bg-rose-50 border border-rose-200 text-rose-700 px-4 py-3 mb-6 mono text-xs font-bold uppercase">
                 {error}
               </div>
             )}
@@ -77,8 +77,9 @@ const Maintenance: React.FC = () => {
             <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                        <label className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Block/Location</label>
+                        <label htmlFor="block" className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Block/Location</label>
                         <select
+                          id="block"
                           value={formData.block}
                           onChange={e => setFormData({...formData, block: e.target.value})}
                           className="w-full bg-[#f4f4f2] border-2 border-[#1a2a40] p-3 text-sm font-bold outline-none focus:bg-white transition-colors"
@@ -91,8 +92,9 @@ const Maintenance: React.FC = () => {
                         </select>
                     </div>
                     <div className="space-y-2">
-                        <label className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Urgency</label>
+                        <label htmlFor="urgency" className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Urgency</label>
                         <select
+                          id="urgency"
                           value={formData.urgency}
                           onChange={e => setFormData({...formData, urgency: e.target.value})}
                           className="w-full bg-[#f4f4f2] border-2 border-[#1a2a40] p-3 text-sm font-bold outline-none focus:bg-white transition-colors"
@@ -105,9 +107,10 @@ const Maintenance: React.FC = () => {
                 </div>
 
                 <div className="space-y-2">
-                    <label className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Nature of Issue</label>
+                    <label htmlFor="nature" className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Nature of Issue</label>
                     <input 
                         required
+                        id="nature"
                         type="text" 
                         value={formData.nature}
                         onChange={e => setFormData({...formData, nature: e.target.value})}
@@ -117,9 +120,10 @@ const Maintenance: React.FC = () => {
                 </div>
 
                 <div className="space-y-2">
-                    <label className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Detailed Description</label>
+                    <label htmlFor="description" className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Detailed Description</label>
                     <textarea 
                         required
+                        id="description"
                         value={formData.description}
                         onChange={e => setFormData({...formData, description: e.target.value})}
                         className="w-full bg-[#f4f4f2] border-2 border-[#1a2a40] p-3 text-sm min-h-[120px] outline-none focus:bg-white transition-colors"
@@ -130,6 +134,7 @@ const Maintenance: React.FC = () => {
                 <button
                   type="submit"
                   disabled={loading}
+                  aria-busy={loading}
                   className="w-full bg-[#1a2a40] text-white font-black py-4 uppercase tracking-[0.2em] sm:tracking-[0.3em] hover:bg-[#c5a059] hover:text-[#1a2a40] transition-all shadow-md active:scale-[0.98] disabled:opacity-50"
                 >
                     {loading ? 'SUBMITTING...' : 'SUBMIT REPORT'}
