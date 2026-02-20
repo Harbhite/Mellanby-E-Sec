@@ -1,5 +1,5 @@
 
-import { HallEvent, NewsArticle, PortalAction } from './types';
+import { HallEvent, NewsArticle, PortalAction, MaintenanceRequest } from './types';
 
 export const COLORS = {
   mellanbyGold: '#c5a059',
@@ -82,5 +82,35 @@ export const MOCK_NEWS: NewsArticle[] = [
     author: 'Warden',
     category: 'Hall News',
     imageUrl: 'https://picsum.photos/seed/mellanby2/800/400'
+  }
+];
+
+export const MOCK_MAINTENANCE_REQUESTS: MaintenanceRequest[] = [
+  {
+    id: 'm1',
+    block: 'BLOCK A',
+    urgency: 'NORMAL',
+    nature: 'Leaking Tap',
+    description: 'The tap in the bathroom sink is leaking constantly.',
+    status: 'Pending',
+    created_at: '2024-03-28T10:00:00Z'
+  },
+  {
+    id: 'm2',
+    block: 'BLOCK C',
+    urgency: 'URGENT (24HR)',
+    nature: 'Power Outage',
+    description: 'No power in room C12 since morning.',
+    status: 'In Progress',
+    created_at: '2024-03-27T08:30:00Z'
+  },
+  {
+    id: 'm3',
+    block: 'BLOCK B',
+    urgency: 'NORMAL',
+    nature: 'Broken Window Latch',
+    description: 'Window in room B05 cannot be closed properly.',
+    status: 'Completed',
+    created_at: '2024-03-25T14:15:00Z'
   }
 ];
