@@ -77,8 +77,9 @@ const Maintenance: React.FC = () => {
             <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                        <label className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Block/Location</label>
+                        <label htmlFor="maintenance-block" className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Block/Location</label>
                         <select
+                          id="maintenance-block"
                           value={formData.block}
                           onChange={e => setFormData({...formData, block: e.target.value})}
                           className="w-full bg-[#f4f4f2] border-2 border-[#1a2a40] p-3 text-sm font-bold outline-none focus:bg-white transition-colors"
@@ -91,8 +92,9 @@ const Maintenance: React.FC = () => {
                         </select>
                     </div>
                     <div className="space-y-2">
-                        <label className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Urgency</label>
+                        <label htmlFor="maintenance-urgency" className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Urgency</label>
                         <select
+                          id="maintenance-urgency"
                           value={formData.urgency}
                           onChange={e => setFormData({...formData, urgency: e.target.value})}
                           className="w-full bg-[#f4f4f2] border-2 border-[#1a2a40] p-3 text-sm font-bold outline-none focus:bg-white transition-colors"
@@ -105,8 +107,9 @@ const Maintenance: React.FC = () => {
                 </div>
 
                 <div className="space-y-2">
-                    <label className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Nature of Issue</label>
+                    <label htmlFor="maintenance-nature" className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Nature of Issue</label>
                     <input 
+                        id="maintenance-nature"
                         required
                         type="text" 
                         value={formData.nature}
@@ -117,8 +120,9 @@ const Maintenance: React.FC = () => {
                 </div>
 
                 <div className="space-y-2">
-                    <label className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Detailed Description</label>
+                    <label htmlFor="maintenance-description" className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Detailed Description</label>
                     <textarea 
+                        id="maintenance-description"
                         required
                         value={formData.description}
                         onChange={e => setFormData({...formData, description: e.target.value})}
