@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { supabase } from '../lib/supabase';
-import { Hammer, AlertTriangle, Info, Clock, CheckCircle } from 'lucide-react';
+import { Hammer, AlertTriangle, Info, Clock, CheckCircle, Loader2 } from 'lucide-react';
 
 const Maintenance: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -77,11 +77,12 @@ const Maintenance: React.FC = () => {
             <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                        <label className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Block/Location</label>
+                        <label htmlFor="block" className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Block/Location</label>
                         <select
+                          id="block"
                           value={formData.block}
                           onChange={e => setFormData({...formData, block: e.target.value})}
-                          className="w-full bg-[#f4f4f2] border-2 border-[#1a2a40] p-3 text-sm font-bold outline-none focus:bg-white transition-colors"
+                          className="w-full bg-[#f4f4f2] border-2 border-[#1a2a40] p-3 text-sm font-bold outline-none focus:bg-white focus:ring-2 focus:ring-[#c5a059] focus:border-transparent transition-colors"
                         >
                             <option value="BLOCK A">BLOCK A</option>
                             <option value="BLOCK B">BLOCK B</option>
@@ -91,11 +92,12 @@ const Maintenance: React.FC = () => {
                         </select>
                     </div>
                     <div className="space-y-2">
-                        <label className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Urgency</label>
+                        <label htmlFor="urgency" className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Urgency</label>
                         <select
+                          id="urgency"
                           value={formData.urgency}
                           onChange={e => setFormData({...formData, urgency: e.target.value})}
-                          className="w-full bg-[#f4f4f2] border-2 border-[#1a2a40] p-3 text-sm font-bold outline-none focus:bg-white transition-colors"
+                          className="w-full bg-[#f4f4f2] border-2 border-[#1a2a40] p-3 text-sm font-bold outline-none focus:bg-white focus:ring-2 focus:ring-[#c5a059] focus:border-transparent transition-colors"
                         >
                             <option value="NORMAL">NORMAL</option>
                             <option value="URGENT (24HR)">URGENT (24HR)</option>
@@ -105,24 +107,26 @@ const Maintenance: React.FC = () => {
                 </div>
 
                 <div className="space-y-2">
-                    <label className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Nature of Issue</label>
+                    <label htmlFor="nature" className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Nature of Issue</label>
                     <input 
+                        id="nature"
                         required
                         type="text" 
                         value={formData.nature}
                         onChange={e => setFormData({...formData, nature: e.target.value})}
                         placeholder="E.G. FAULTY LOUVER, PLUMBING LEAK"
-                        className="w-full bg-[#f4f4f2] border-2 border-[#1a2a40] p-3 text-sm outline-none focus:bg-white transition-colors"
+                        className="w-full bg-[#f4f4f2] border-2 border-[#1a2a40] p-3 text-sm outline-none focus:bg-white focus:ring-2 focus:ring-[#c5a059] focus:border-transparent transition-colors"
                     />
                 </div>
 
                 <div className="space-y-2">
-                    <label className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Detailed Description</label>
+                    <label htmlFor="description" className="mono text-[9px] font-bold uppercase text-[#1a2a40]/60">Detailed Description</label>
                     <textarea 
+                        id="description"
                         required
                         value={formData.description}
                         onChange={e => setFormData({...formData, description: e.target.value})}
-                        className="w-full bg-[#f4f4f2] border-2 border-[#1a2a40] p-3 text-sm min-h-[120px] outline-none focus:bg-white transition-colors"
+                        className="w-full bg-[#f4f4f2] border-2 border-[#1a2a40] p-3 text-sm min-h-[120px] outline-none focus:bg-white focus:ring-2 focus:ring-[#c5a059] focus:border-transparent transition-colors"
                         placeholder="DESCRIBE THE ISSUE IN DETAIL FOR THE MAINTENANCE TEAM..."
                     />
                 </div>
@@ -130,9 +134,14 @@ const Maintenance: React.FC = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-[#1a2a40] text-white font-black py-4 uppercase tracking-[0.2em] sm:tracking-[0.3em] hover:bg-[#c5a059] hover:text-[#1a2a40] transition-all shadow-md active:scale-[0.98] disabled:opacity-50"
+                  className="w-full bg-[#1a2a40] text-white font-black py-4 uppercase tracking-[0.2em] sm:tracking-[0.3em] hover:bg-[#c5a059] hover:text-[#1a2a40] transition-all shadow-md active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
                 >
-                    {loading ? 'SUBMITTING...' : 'SUBMIT REPORT'}
+                    {loading ? (
+                        <>
+                            <Loader2 className="animate-spin" size={20} />
+                            SUBMITTING...
+                        </>
+                    ) : 'SUBMIT REPORT'}
                 </button>
             </form>
         </div>
