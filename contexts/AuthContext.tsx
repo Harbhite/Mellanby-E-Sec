@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
@@ -19,38 +18,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const enableMockAdmin = () => {
-    console.warn('Enabling Mock Admin Mode (Fallback)');
-    const mockUser: User = {
-      id: 'mock-admin-id',
-      aud: 'authenticated',
-      role: 'authenticated',
-      email: 'admin@example.com',
-      email_confirmed_at: new Date().toISOString(),
-      phone: '',
-      confirmed_at: new Date().toISOString(),
-      last_sign_in_at: new Date().toISOString(),
-      app_metadata: { provider: 'email', providers: ['email'] },
-      user_metadata: {},
-      identities: [],
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
-    };
-
-    const mockSession: Session = {
-      access_token: 'mock-token',
-      refresh_token: 'mock-refresh-token',
-      expires_in: 3600,
-      token_type: 'bearer',
-      user: mockUser,
-    };
-
-    setSession(mockSession);
-    setUser(mockUser);
-    setIsAdmin(true);
-    setLoading(false);
-  };
-
   const checkAdmin = async (userId: string) => {
     try {
       const profilePromise = supabase
@@ -69,14 +36,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       if (error) {
         console.error('Error checking admin status:', error);
-        enableMockAdmin();
+        setIsAdmin(false);
       } else {
         setIsAdmin(data?.role === 'admin');
-        setLoading(false);
       }
     } catch (error) {
       console.error('Error checking admin status (exception/timeout):', error);
-      enableMockAdmin();
+      setIsAdmin(false);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -96,7 +64,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
         if (error) {
             console.error("Supabase getSession error:", error);
-            if (mounted) enableMockAdmin();
+            if (mounted) setLoading(false);
             return;
         }
 
@@ -106,15 +74,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setUser(data.session.user);
             await checkAdmin(data.session.user.id);
           } else {
-            // Fallback to mock admin if no session is found, to ensure the UI is accessible
-            // in development environments without proper Supabase setup.
-            console.warn("No session found. Enabling mock admin for development.");
-            enableMockAdmin();
+            setSession(null);
+            setUser(null);
+            setIsAdmin(false);
+            setLoading(false);
           }
         }
       } catch (err) {
         console.error("Auth initialization failed:", err);
-        if (mounted) enableMockAdmin();
+        if (mounted) setLoading(false);
       }
     };
 
@@ -125,7 +93,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (session?.user) {
         setSession(session);
         setUser(session.user);
+        // Only check admin if we have a user and we aren't already loading (or re-check)
+        // We set loading to true while checking? No, user might be navigating.
+        // But for initial load it matters.
         await checkAdmin(session.user.id);
+      } else {
+        setSession(null);
+        setUser(null);
+        setIsAdmin(false);
+        setLoading(false);
       }
     });
 
