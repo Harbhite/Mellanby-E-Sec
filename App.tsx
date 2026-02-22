@@ -24,6 +24,7 @@ import Dashboard from './pages/admin/Dashboard';
 import EventsAdmin from './pages/admin/EventsAdmin';
 import NewsAdmin from './pages/admin/NewsAdmin';
 import MaintenanceAdmin from './pages/admin/MaintenanceAdmin';
+import DocumentsAdmin from './pages/admin/DocumentsAdmin';
 
 const App: React.FC = () => {
   return (
@@ -54,6 +55,7 @@ const App: React.FC = () => {
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="events" element={<EventsAdmin />} />
               <Route path="news" element={<NewsAdmin />} />
+              <Route path="documents" element={<DocumentsAdmin />} />
               <Route path="maintenance" element={<MaintenanceAdmin />} />
               <Route index element={<Dashboard />} />
             </Route>
