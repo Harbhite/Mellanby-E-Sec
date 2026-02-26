@@ -46,6 +46,7 @@ const Navbar: React.FC = () => {
                 className={`px-4 py-2 rounded-md text-[11px] font-bold uppercase tracking-widest transition-all duration-200 flex items-center gap-2
                   ${isActive(item.path) ? 'bg-[#c5a059] text-[#1a2a40] shadow-sm' : 'hover:bg-white/10 text-white/90 hover:text-white'}
                 `}
+                aria-current={isActive(item.path) ? 'page' : undefined}
               >
                 <item.icon size={14} className={isActive(item.path) ? 'text-[#1a2a40]' : 'text-[#c5a059]'} />
                 {item.label}
@@ -59,6 +60,7 @@ const Navbar: React.FC = () => {
                 to={item.path}
                 className={`p-2.5 rounded-md transition-all duration-200 text-white/70 hover:text-[#1a2a40] hover:bg-[#c5a059]`}
                 title={item.label}
+                aria-label={item.label}
               >
                 <item.icon size={18} />
               </Link>
@@ -71,6 +73,8 @@ const Navbar: React.FC = () => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-white hover:text-[#c5a059] focus:outline-none p-2"
+              aria-label="Toggle navigation menu"
+              aria-expanded={isOpen}
             >
               {isOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
