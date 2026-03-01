@@ -169,6 +169,7 @@ const Gallery: React.FC = () => {
           />
           
           <button 
+            aria-label="Close image"
             onClick={() => setSelectedImage(null)}
             className="absolute top-4 right-4 sm:top-8 sm:right-8 z-10 bg-white/10 hover:bg-white/20 text-white p-3 transition-colors"
           >
@@ -176,6 +177,7 @@ const Gallery: React.FC = () => {
           </button>
 
           <button 
+            aria-label="Previous image"
             onClick={() => navigateImage('prev')}
             className="absolute left-2 sm:left-8 z-10 bg-white/10 hover:bg-white/20 text-white p-3 transition-colors"
           >
@@ -183,6 +185,7 @@ const Gallery: React.FC = () => {
           </button>
 
           <button 
+            aria-label="Next image"
             onClick={() => navigateImage('next')}
             className="absolute right-2 sm:right-8 z-10 bg-white/10 hover:bg-white/20 text-white p-3 transition-colors"
           >
