@@ -43,7 +43,7 @@ const AdminLayout: React.FC = () => {
             <h1 className="text-xl font-black uppercase tracking-widest">Admin</h1>
             <p className="mono text-[10px] text-[#c5a059] uppercase tracking-widest mt-1">e-Secretariat</p>
           </div>
-          <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden text-white/50 hover:text-white">
+          <button onClick={() => setIsSidebarOpen(false)} aria-label="Close sidebar" className="lg:hidden text-white/50 hover:text-white">
             <X size={20} />
           </button>
         </div>
@@ -83,7 +83,7 @@ const AdminLayout: React.FC = () => {
       <div className="flex-1 flex flex-col h-screen overflow-hidden">
         {/* Header */}
         <header className="bg-white border-b border-[#e0e0dc] p-4 flex items-center lg:hidden">
-          <button onClick={() => setIsSidebarOpen(true)} className="text-[#1a2a40]">
+          <button onClick={() => setIsSidebarOpen(true)} aria-label="Open sidebar" aria-expanded={isSidebarOpen} className="text-[#1a2a40]">
             <Menu size={24} />
           </button>
           <span className="ml-4 font-black uppercase tracking-widest text-[#1a2a40]">Menu</span>

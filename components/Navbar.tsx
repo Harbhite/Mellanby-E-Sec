@@ -70,6 +70,8 @@ const Navbar: React.FC = () => {
           <div className="lg:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isOpen}
               className="text-white hover:text-[#c5a059] focus:outline-none p-2"
             >
               {isOpen ? <X size={28} /> : <Menu size={28} />}
