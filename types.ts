@@ -27,3 +27,17 @@ export interface PortalAction {
   title: string;
   description: string;
 }
+
+export interface MaintenanceRequest {
+  id: string;
+  block: string;
+  roomNumber?: string;
+  urgency: 'LOW' | 'NORMAL' | 'HIGH' | 'URGENT (24HR)';
+  nature: string;
+  description: string;
+  status: 'Pending' | 'In Progress' | 'Resolved' | 'Completed';
+  dateReported?: string;
+  reporterId?: string;
+  reporterName?: string;
+  created_at?: string;
+}
