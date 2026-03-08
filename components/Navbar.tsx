@@ -47,7 +47,7 @@ const Navbar: React.FC = () => {
                   ${isActive(item.path) ? 'bg-[#c5a059] text-[#1a2a40] shadow-sm' : 'hover:bg-white/10 text-white/90 hover:text-white'}
                 `}
               >
-                <item.icon size={14} className={isActive(item.path) ? 'text-[#1a2a40]' : 'text-[#c5a059]'} />
+                <item.icon size={14} className={isActive(item.path) ? 'text-[#1a2a40]' : 'text-[#c5a059]'} aria-hidden="true" />
                 {item.label}
               </Link>
             ))}
@@ -59,8 +59,9 @@ const Navbar: React.FC = () => {
                 to={item.path}
                 className={`p-2.5 rounded-md transition-all duration-200 text-white/70 hover:text-[#1a2a40] hover:bg-[#c5a059]`}
                 title={item.label}
+                aria-label={item.label}
               >
-                <item.icon size={18} />
+                <item.icon size={18} aria-hidden="true" />
               </Link>
             ))}
             </div>
@@ -71,8 +72,10 @@ const Navbar: React.FC = () => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-white hover:text-[#c5a059] focus:outline-none p-2"
+              aria-expanded={isOpen}
+              aria-label="Toggle menu"
             >
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
+              {isOpen ? <X size={28} aria-hidden="true" /> : <Menu size={28} aria-hidden="true" />}
             </button>
           </div>
         </div>
@@ -91,7 +94,7 @@ const Navbar: React.FC = () => {
                    ${isActive(item.path) ? 'bg-[#c5a059] text-[#1a2a40]' : 'text-white hover:bg-white/10'}
                 `}
               >
-                <item.icon size={18} />
+                <item.icon size={18} aria-hidden="true" />
                 {item.label}
               </Link>
             ))}
@@ -105,7 +108,7 @@ const Navbar: React.FC = () => {
                     onClick={() => setIsOpen(false)}
                     className="flex flex-col items-center justify-center p-3 rounded-md text-white/80 hover:bg-white/10 hover:text-[#c5a059] gap-2 bg-[#131f30]"
                   >
-                    <item.icon size={20} />
+                    <item.icon size={20} aria-hidden="true" />
                     <span className="text-[9px] uppercase tracking-wider font-bold">{item.label}</span>
                   </Link>
                ))}
