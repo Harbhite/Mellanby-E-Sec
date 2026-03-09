@@ -27,3 +27,13 @@ export interface PortalAction {
   title: string;
   description: string;
 }
+
+export interface MaintenanceRequest {
+  id: string;
+  block: string;
+  urgency: string;
+  nature: string;
+  description: string;
+  status: 'Pending' | 'In Progress' | 'Completed';
+  created_at: string;
+}
