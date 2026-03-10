@@ -1,1 +1,5 @@
 UX and Accessibility Learnings: Documented usage of lucide-react, Tailwind CSS, and HashRouter.
+
+## 2024-05-24 - [Accessible Icon-only Buttons in Navigation]
+**Learning:** Found that the main navigation bar uses several icon-only buttons (mobile menu toggle, secondary portal links) without proper accessibility semantics. Simply adding an `aria-label` isn't always enough for toggle buttons, which also need `aria-expanded` to communicate their state to screen readers. Additionally, inner SVG icons from `lucide-react` should be explicitly marked `aria-hidden="true"` to prevent redundant reading. Keyboard navigation was also lacking clear focus states on these icon buttons.
+**Action:** When creating or updating icon-only buttons in the navigation layout, always include an explicit `aria-label`. For toggle buttons, bind `aria-expanded` to the active state. Add `focus-visible:ring-2` (and optionally an offset) to ensure keyboard users can see where they are. Explicitly hide inner decorative icons using `aria-hidden="true"`.
