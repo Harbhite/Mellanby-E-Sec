@@ -43,6 +43,7 @@ const Navbar: React.FC = () => {
               <Link
                 key={item.path}
                 to={item.path}
+                aria-current={isActive(item.path) ? 'page' : undefined}
                 className={`px-4 py-2 rounded-md text-[11px] font-bold uppercase tracking-widest transition-all duration-200 flex items-center gap-2
                   ${isActive(item.path) ? 'bg-[#c5a059] text-[#1a2a40] shadow-sm' : 'hover:bg-white/10 text-white/90 hover:text-white'}
                 `}
@@ -57,6 +58,8 @@ const Navbar: React.FC = () => {
               <Link
                 key={item.path}
                 to={item.path}
+                aria-label={item.label}
+                aria-current={isActive(item.path) ? 'page' : undefined}
                 className={`p-2.5 rounded-md transition-all duration-200 text-white/70 hover:text-[#1a2a40] hover:bg-[#c5a059]`}
                 title={item.label}
               >
@@ -71,6 +74,8 @@ const Navbar: React.FC = () => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-white hover:text-[#c5a059] focus:outline-none p-2"
+              aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={isOpen}
             >
               {isOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
@@ -87,6 +92,7 @@ const Navbar: React.FC = () => {
                 key={item.path}
                 to={item.path}
                 onClick={() => setIsOpen(false)}
+                aria-current={isActive(item.path) ? 'page' : undefined}
                 className={`block px-4 py-3 rounded-md text-xs font-bold uppercase tracking-widest flex items-center gap-4
                    ${isActive(item.path) ? 'bg-[#c5a059] text-[#1a2a40]' : 'text-white hover:bg-white/10'}
                 `}
@@ -103,6 +109,7 @@ const Navbar: React.FC = () => {
                     key={item.path}
                     to={item.path}
                     onClick={() => setIsOpen(false)}
+                    aria-current={isActive(item.path) ? 'page' : undefined}
                     className="flex flex-col items-center justify-center p-3 rounded-md text-white/80 hover:bg-white/10 hover:text-[#c5a059] gap-2 bg-[#131f30]"
                   >
                     <item.icon size={20} />
