@@ -43,8 +43,13 @@ const AdminLayout: React.FC = () => {
             <h1 className="text-xl font-black uppercase tracking-widest">Admin</h1>
             <p className="mono text-[10px] text-[#c5a059] uppercase tracking-widest mt-1">e-Secretariat</p>
           </div>
-          <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden text-white/50 hover:text-white">
-            <X size={20} />
+          <button
+            onClick={() => setIsSidebarOpen(false)}
+            className="lg:hidden text-white/50 hover:text-white focus-visible:ring-2 focus-visible:ring-[#c5a059] focus-visible:outline-none rounded-md p-1"
+            aria-label="Close sidebar"
+            aria-expanded={isSidebarOpen}
+          >
+            <X size={20} aria-hidden="true" />
           </button>
         </div>
 
@@ -55,14 +60,14 @@ const AdminLayout: React.FC = () => {
               to={item.path}
               onClick={() => setIsSidebarOpen(false)}
               className={({ isActive }) => `
-                flex items-center gap-3 px-4 py-3 rounded transition-colors
+                flex items-center gap-3 px-4 py-3 rounded transition-colors focus-visible:ring-2 focus-visible:ring-[#c5a059] focus-visible:outline-none
                 ${isActive
                   ? 'bg-[#c5a059] text-[#1a2a40] font-bold'
                   : 'text-white/70 hover:bg-white/10 hover:text-white'
                 }
               `}
             >
-              <item.icon size={18} />
+              <item.icon size={18} aria-hidden="true" />
               <span className="mono text-xs uppercase tracking-widest">{item.label}</span>
             </NavLink>
           ))}
@@ -71,9 +76,9 @@ const AdminLayout: React.FC = () => {
         <div className="absolute bottom-0 w-full p-4 border-t border-white/10">
           <button
             onClick={handleSignOut}
-            className="flex items-center gap-3 px-4 py-3 w-full text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition-colors rounded"
+            className="flex items-center gap-3 px-4 py-3 w-full text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition-colors rounded focus-visible:ring-2 focus-visible:ring-rose-400 focus-visible:outline-none"
           >
-            <LogOut size={18} />
+            <LogOut size={18} aria-hidden="true" />
             <span className="mono text-xs uppercase tracking-widest">Sign Out</span>
           </button>
         </div>
@@ -83,8 +88,13 @@ const AdminLayout: React.FC = () => {
       <div className="flex-1 flex flex-col h-screen overflow-hidden">
         {/* Header */}
         <header className="bg-white border-b border-[#e0e0dc] p-4 flex items-center lg:hidden">
-          <button onClick={() => setIsSidebarOpen(true)} className="text-[#1a2a40]">
-            <Menu size={24} />
+          <button
+            onClick={() => setIsSidebarOpen(true)}
+            className="text-[#1a2a40] focus-visible:ring-2 focus-visible:ring-[#1a2a40] focus-visible:outline-none rounded-md p-1"
+            aria-label="Open sidebar"
+            aria-expanded={isSidebarOpen}
+          >
+            <Menu size={24} aria-hidden="true" />
           </button>
           <span className="ml-4 font-black uppercase tracking-widest text-[#1a2a40]">Menu</span>
         </header>
