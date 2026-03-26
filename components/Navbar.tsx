@@ -70,9 +70,12 @@ const Navbar: React.FC = () => {
           <div className="lg:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-white hover:text-[#c5a059] focus:outline-none p-2"
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              className="text-white hover:text-[#c5a059] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a059] p-2 rounded-md"
             >
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
+              {isOpen ? <X size={28} aria-hidden="true" /> : <Menu size={28} aria-hidden="true" />}
             </button>
           </div>
         </div>
@@ -80,7 +83,7 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu Dropdown */}
       {isOpen && (
-        <div className="lg:hidden bg-[#1a2a40] border-t border-white/10 animate-in slide-in-from-top-2 duration-200">
+        <div id="mobile-menu" className="lg:hidden bg-[#1a2a40] border-t border-white/10 animate-in slide-in-from-top-2 duration-200">
           <div className="px-2 pt-4 pb-6 space-y-2 sm:px-3">
             {navItems.map((item) => (
               <Link
