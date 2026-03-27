@@ -42,8 +42,11 @@ const DocumentArchive: React.FC = () => {
                         <Lock size={12} /> RESTRICTED
                     </div>
                 ) : (
-                    <button className="text-[#1a2a40] hover:text-[#c5a059] p-2">
-                        <Download size={20} />
+                    <button
+                      className="text-[#1a2a40] hover:text-[#c5a059] p-2"
+                      aria-label={`Download ${doc.name}`}
+                    >
+                        <Download size={20} aria-hidden="true" />
                     </button>
                 )}
             </div>
