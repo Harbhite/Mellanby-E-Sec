@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center">
           {/* Logo / Brand */}
-          <Link to="/" className="flex-shrink-0 flex items-center gap-4 group">
+          <Link to="/" className="flex-shrink-0 flex items-center gap-4 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a059] rounded-md">
              <div className="w-10 h-10 bg-[#c5a059] flex items-center justify-center rounded-sm shadow-sm group-hover:scale-105 transition-transform">
                 <span className="text-[#1a2a40] font-black text-xl">M</span>
              </div>
@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`px-4 py-2 rounded-md text-[11px] font-bold uppercase tracking-widest transition-all duration-200 flex items-center gap-2
+                className={`px-4 py-2 rounded-md text-[11px] font-bold uppercase tracking-widest transition-all duration-200 flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a059]
                   ${isActive(item.path) ? 'bg-[#c5a059] text-[#1a2a40] shadow-sm' : 'hover:bg-white/10 text-white/90 hover:text-white'}
                 `}
               >
@@ -57,8 +57,9 @@ const Navbar: React.FC = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`p-2.5 rounded-md transition-all duration-200 text-white/70 hover:text-[#1a2a40] hover:bg-[#c5a059]`}
+                className={`p-2.5 rounded-md transition-all duration-200 text-white/70 hover:text-[#1a2a40] hover:bg-[#c5a059] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a059]`}
                 title={item.label}
+                aria-label={item.label}
               >
                 <item.icon size={18} />
               </Link>
@@ -70,7 +71,9 @@ const Navbar: React.FC = () => {
           <div className="lg:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-white hover:text-[#c5a059] focus:outline-none p-2"
+              className="text-white hover:text-[#c5a059] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a059] p-2 rounded-md"
+              aria-expanded={isOpen}
+              aria-label="Toggle navigation menu"
             >
               {isOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
@@ -87,7 +90,7 @@ const Navbar: React.FC = () => {
                 key={item.path}
                 to={item.path}
                 onClick={() => setIsOpen(false)}
-                className={`block px-4 py-3 rounded-md text-xs font-bold uppercase tracking-widest flex items-center gap-4
+                className={`block px-4 py-3 rounded-md text-xs font-bold uppercase tracking-widest flex items-center gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a059]
                    ${isActive(item.path) ? 'bg-[#c5a059] text-[#1a2a40]' : 'text-white hover:bg-white/10'}
                 `}
               >
@@ -103,7 +106,8 @@ const Navbar: React.FC = () => {
                     key={item.path}
                     to={item.path}
                     onClick={() => setIsOpen(false)}
-                    className="flex flex-col items-center justify-center p-3 rounded-md text-white/80 hover:bg-white/10 hover:text-[#c5a059] gap-2 bg-[#131f30]"
+                    className="flex flex-col items-center justify-center p-3 rounded-md text-white/80 hover:bg-white/10 hover:text-[#c5a059] gap-2 bg-[#131f30] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a059]"
+                    aria-label={item.label}
                   >
                     <item.icon size={20} />
                     <span className="text-[9px] uppercase tracking-wider font-bold">{item.label}</span>
