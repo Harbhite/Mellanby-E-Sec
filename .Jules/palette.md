@@ -1,1 +1,5 @@
 UX and Accessibility Learnings: Documented usage of lucide-react, Tailwind CSS, and HashRouter.
+
+## 2024-05-15 - Accessible Navigation Toggle and Icon Links
+**Learning:** State-driven toggle components like hamburger menus require dynamic `aria-expanded` and `aria-label` attributes to properly communicate their current state to screen readers. They also need `aria-controls` to link to the dropdown container. In addition, icon-only links require `aria-label` for screen reader context, while the decorative SVGs inside them should be explicitly marked with `aria-hidden="true"` to prevent redundant announcements. Proper keyboard focus states (`focus-visible:ring-2`) are critical for all interactive elements.
+**Action:** Always include dynamic ARIA states and explicit structural links (`aria-controls` with `id`) for interactive toggles. Ensure all icon-only buttons/links have `aria-label` on the parent and `aria-hidden="true"` on the icon itself. Add explicit `focus-visible` styling to ensure proper keyboard navigation.
