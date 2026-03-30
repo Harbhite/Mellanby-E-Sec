@@ -119,6 +119,7 @@ const Gallery: React.FC = () => {
             <button
               key={cat}
               onClick={() => setFilter(cat)}
+              aria-label={`Filter by ${cat}`}
               className={`px-3 py-1.5 mono text-[9px] sm:text-[10px] uppercase border border-[#1a2a40] transition-all flex-grow sm:flex-grow-0
                 ${filter === cat ? 'bg-[#1a2a40] text-white' : 'bg-transparent text-[#1a2a40] hover:bg-black/5'}
               `}
@@ -170,6 +171,7 @@ const Gallery: React.FC = () => {
           
           <button 
             onClick={() => setSelectedImage(null)}
+            aria-label="Close image gallery"
             className="absolute top-4 right-4 sm:top-8 sm:right-8 z-10 bg-white/10 hover:bg-white/20 text-white p-3 transition-colors"
           >
             <X size={24} />
@@ -177,6 +179,7 @@ const Gallery: React.FC = () => {
 
           <button 
             onClick={() => navigateImage('prev')}
+            aria-label="Previous image"
             className="absolute left-2 sm:left-8 z-10 bg-white/10 hover:bg-white/20 text-white p-3 transition-colors"
           >
             <ChevronLeft size={24} />
@@ -184,6 +187,7 @@ const Gallery: React.FC = () => {
 
           <button 
             onClick={() => navigateImage('next')}
+            aria-label="Next image"
             className="absolute right-2 sm:right-8 z-10 bg-white/10 hover:bg-white/20 text-white p-3 transition-colors"
           >
             <ChevronRight size={24} />
