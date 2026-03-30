@@ -57,10 +57,11 @@ const Navbar: React.FC = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`p-2.5 rounded-md transition-all duration-200 text-white/70 hover:text-[#1a2a40] hover:bg-[#c5a059]`}
+                className={`p-2.5 rounded-md transition-all duration-200 text-white/70 hover:text-[#1a2a40] hover:bg-[#c5a059] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a059] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a2a40]`}
                 title={item.label}
+                aria-label={item.label}
               >
-                <item.icon size={18} />
+                <item.icon size={18} aria-hidden="true" />
               </Link>
             ))}
             </div>
@@ -70,9 +71,12 @@ const Navbar: React.FC = () => {
           <div className="lg:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-white hover:text-[#c5a059] focus:outline-none p-2"
+              className="text-white hover:text-[#c5a059] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a059] rounded-md p-2"
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
+              aria-label="Toggle navigation menu"
             >
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
+              {isOpen ? <X size={28} aria-hidden="true" /> : <Menu size={28} aria-hidden="true" />}
             </button>
           </div>
         </div>
@@ -80,7 +84,7 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu Dropdown */}
       {isOpen && (
-        <div className="lg:hidden bg-[#1a2a40] border-t border-white/10 animate-in slide-in-from-top-2 duration-200">
+        <div id="mobile-menu" className="lg:hidden bg-[#1a2a40] border-t border-white/10 animate-in slide-in-from-top-2 duration-200">
           <div className="px-2 pt-4 pb-6 space-y-2 sm:px-3">
             {navItems.map((item) => (
               <Link
@@ -103,9 +107,9 @@ const Navbar: React.FC = () => {
                     key={item.path}
                     to={item.path}
                     onClick={() => setIsOpen(false)}
-                    className="flex flex-col items-center justify-center p-3 rounded-md text-white/80 hover:bg-white/10 hover:text-[#c5a059] gap-2 bg-[#131f30]"
+                    className="flex flex-col items-center justify-center p-3 rounded-md text-white/80 hover:bg-white/10 hover:text-[#c5a059] gap-2 bg-[#131f30] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a059] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a2a40]"
                   >
-                    <item.icon size={20} />
+                    <item.icon size={20} aria-hidden="true" />
                     <span className="text-[9px] uppercase tracking-wider font-bold">{item.label}</span>
                   </Link>
                ))}
