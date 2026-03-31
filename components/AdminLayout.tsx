@@ -34,6 +34,7 @@ const AdminLayout: React.FC = () => {
 
       {/* Sidebar */}
       <aside
+        id="admin-sidebar"
         className={`fixed lg:static inset-y-0 left-0 z-30 w-64 bg-[#1a2a40] text-white transition-transform duration-300 transform
           ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         `}
@@ -43,8 +44,12 @@ const AdminLayout: React.FC = () => {
             <h1 className="text-xl font-black uppercase tracking-widest">Admin</h1>
             <p className="mono text-[10px] text-[#c5a059] uppercase tracking-widest mt-1">e-Secretariat</p>
           </div>
-          <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden text-white/50 hover:text-white">
-            <X size={20} />
+          <button
+            onClick={() => setIsSidebarOpen(false)}
+            className="lg:hidden text-white/50 hover:text-white focus-visible:ring-2 focus-visible:ring-white rounded-md"
+            aria-label="Close sidebar menu"
+          >
+            <X size={20} aria-hidden="true" />
           </button>
         </div>
 
@@ -83,8 +88,14 @@ const AdminLayout: React.FC = () => {
       <div className="flex-1 flex flex-col h-screen overflow-hidden">
         {/* Header */}
         <header className="bg-white border-b border-[#e0e0dc] p-4 flex items-center lg:hidden">
-          <button onClick={() => setIsSidebarOpen(true)} className="text-[#1a2a40]">
-            <Menu size={24} />
+          <button
+            onClick={() => setIsSidebarOpen(true)}
+            className="text-[#1a2a40] focus-visible:ring-2 focus-visible:ring-[#1a2a40] rounded-md"
+            aria-label="Open sidebar menu"
+            aria-expanded={isSidebarOpen}
+            aria-controls="admin-sidebar"
+          >
+            <Menu size={24} aria-hidden="true" />
           </button>
           <span className="ml-4 font-black uppercase tracking-widest text-[#1a2a40]">Menu</span>
         </header>
