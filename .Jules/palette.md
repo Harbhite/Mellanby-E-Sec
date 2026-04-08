@@ -1,1 +1,5 @@
 UX and Accessibility Learnings: Documented usage of lucide-react, Tailwind CSS, and HashRouter.
+
+## 2025-02-12 - Icon-only buttons and state-driven toggles
+**Learning:** Found that this app's top bar layout uses several icon-only links for secondary portal pages (exec-council, document-archive, maintenance) and a hamburger button for mobile menu. These lacked screen reader accessible names and dynamic state announcements. Using `lucide-react` icons inside these buttons requires setting `aria-hidden="true"` to prevent screen readers from incorrectly announcing the raw SVG element when an `aria-label` is already present on the parent button. Also, state-driven mobile menu toggles need `aria-controls` referencing an `id` on the dropdown container and a dynamic `aria-expanded` attribute.
+**Action:** Always verify that buttons or links with only `lucide-react` icons use `aria-label` on the button/link element itself, and set `aria-hidden="true"` on the inner `<Icon>` component. Always use `focus-visible:ring-2` for keyboard accessibility, and ensure state toggles include `aria-expanded` and `aria-controls`.
