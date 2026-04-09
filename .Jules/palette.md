@@ -1,1 +1,2 @@
 UX and Accessibility Learnings: Documented usage of lucide-react, Tailwind CSS, and HashRouter.
+\n## 2026-03-03 - Adding ARIA labels to mobile menu buttons\n**Learning:** The mobile menu pattern in components/Navbar.tsx toggled state using an icon-only button without an `aria-label` or `aria-expanded` attribute, leaving screen reader users without context about the button's action or current state.\n**Action:** Add `aria-label` and `aria-expanded` attributes to icon-only toggle buttons in navigation components.
