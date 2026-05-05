@@ -1,1 +1,5 @@
 UX and Accessibility Learnings: Documented usage of lucide-react, Tailwind CSS, and HashRouter.
+
+## 2024-05-05 - Accessible Mobile Menu Toggle
+**Learning:** Toggle components like the mobile hamburger menu require dynamic `aria-expanded` attributes tied to state, as well as `aria-controls` explicitly linking the button to the dropdown container. Adding robust keyboard focus states (`focus-visible:ring-2 focus-visible:ring-[#c5a059]`) significantly improves the usability for users relying on keyboard navigation without cluttering the UI for mouse users. `aria-hidden="true"` is also essential for nested generic SVG icons to prevent redundant or confusing screen reader announcements.
+**Action:** When implementing or updating toggle buttons (dropdowns, accordions, hamburger menus), always verify that `aria-expanded`, `aria-controls`, `aria-label`, and `focus-visible` styles are appropriately synchronized with the component's internal state and visual design, and that internal decorative icons are hidden from screen readers.
