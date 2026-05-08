@@ -1,1 +1,5 @@
 UX and Accessibility Learnings: Documented usage of lucide-react, Tailwind CSS, and HashRouter.
+
+## 2024-05-14 - Navigation Bar Accessibility
+**Learning:** For state-driven toggle components like hamburger menus, accessibility standards require dynamic `aria-expanded` and `aria-label` attributes, as well as an `aria-controls` attribute explicitly linking the toggle button to the target container's ID. In addition, when using `lucide-react` icons inside icon-only buttons, the inner SVG icons should be explicitly marked with `aria-hidden="true"` to prevent redundant screen reader announcements. Finally, keyboard navigation is crucial, so adding focus-visible indicators (like `focus-visible:ring-2 focus-visible:ring-[#c5a059]`) is necessary for interactive elements.
+**Action:** When implementing or reviewing navigation bars and toggle menus, ensure dynamic ARIA attributes are set, explicit IDs link buttons to controlled containers, decorative icons are hidden from screen readers, and clear focus states are visible for keyboard users.
