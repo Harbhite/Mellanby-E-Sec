@@ -1,1 +1,4 @@
 UX and Accessibility Learnings: Documented usage of lucide-react, Tailwind CSS, and HashRouter.
+## 2026-05-14 - Accessible Mobile Navigation
+**Learning:** The mobile menu button in `Navbar.tsx` lacked critical state attributes (`aria-expanded`, `aria-controls`) and a visible focus state, making it inaccessible to screen readers and keyboard users. Additionally, relying dynamically on `isOpen` for Playwright verification using `aria-expanded` is brittle; structural locators like `[aria-controls='mobile-menu']` are more resilient.
+**Action:** Always pair interactive toggle buttons with dynamic `aria-expanded`, explicitly link them to their target container using `aria-controls` and an `id`, hide decorative inner icons using `aria-hidden='true'`, and ensure consistent focus rings (e.g., `focus-visible:ring-2`) that align with the brand's primary color.
