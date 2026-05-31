@@ -1,1 +1,5 @@
 UX and Accessibility Learnings: Documented usage of lucide-react, Tailwind CSS, and HashRouter.
+
+## 2024-05-31 - Mobile Menu Toggle Accessibility
+**Learning:** For state-driven toggle components like the mobile hamburger menu, dynamic `aria-expanded` and `aria-label` are required, along with `aria-controls` linking to the container's ID. When applying `aria-label` to buttons containing lucide-react icons, the inner SVG must be explicitly marked `aria-hidden="true"` to prevent redundant screen reader announcements. Furthermore, when verifying toggles via automated testing (Playwright), state-dependent attributes (like `aria-label`) should be avoided for element selection in favor of resilient structural classes or `aria-controls`, as dynamic changes can cause script timeouts.
+**Action:** When implementing or modifying any toggle components in the future, ensure the trifecta of accessibility attributes (`aria-expanded`, `aria-label`, `aria-controls`) are present, inner SVGs are hidden from screen readers, and tests rely on static attributes for interaction.
